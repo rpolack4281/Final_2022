@@ -173,6 +173,16 @@ colPerc(table1)
 
 The most important information: among the LGBTQ who contracted covid19 13.88% of them took the placebo, while 86.67% of them took the vaccine. A handful of the LGBTQ who got covid took the placebo, therefore the vaccine seems to be working among the LGBTQ.
 
+#### Inferential Results 
+
+```{r}
+chisq.test(table1)
+chisqtestGC(table1)
+lgbtqfisher<-fisher.test(table1)
+lgbtqfisher
+```
+
+The observed counts table shows the actual number of LGBTQ who got covid and who didn't. Also the p-value is small meaning there is a statistical difference in the effect of the placebo and vaccine among LGBTQ in preventing the infection. LGBTQ who took the placebo are about 2 times more likely to contract covid than those who took the vaccine based on the odds ratio value.
 
 
 ## Druggies
