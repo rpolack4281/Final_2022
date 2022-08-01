@@ -117,6 +117,17 @@ colPerc(table1)
 
 The most important information: among females who contracted covid19 58.89% of them took the placebo, while 41.11% of them took the vaccine. A majority of the females who got covid took the placebo, therefore the vaccine seems to be working among the females.
 
+#### Inferential Results 
+
+```{r}
+chisq.test(table1)
+chisqtestGC(table1)
+femalefisher<-fisher.test(table1)
+femalefisher
+```
+
+The observed counts table shows the actual number of females who got covid and who didn't. Also the p-value is small meaning there is a statistical difference in the effect of the placebo and vaccine among females in preventing the infection. Females who took the placebo are about 2 times more likely to contract covid than those who took the vaccine based on the odds ratio value. 
+
 
 ## LGBTQ
 
