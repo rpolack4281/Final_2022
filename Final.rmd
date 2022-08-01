@@ -20,11 +20,71 @@ FinalData <- FinalData %>%
 mutate(across(where(is.character), as.factor))
 ```
 
+```{r include=FALSE,echo=FALSE}
+Males<- filter(FinalData, sex=="M");
+Females<- filter(FinalData, sex=="F")
+LGBTQ<- filter(FinalData, LGBTQ=="gay")
+DrugUsers<- filter(FinalData, DrugUser=="yes")
+```
+
 # Introduction
 
 A new  preventative vaccine (covid91) is under test in clinical trials. Given the nature of this vaccine it is suspected that the drug may exhibit different effectiveness across the variety of subpopulations tracked. Consider population subgroups by gender( guys and gals), drug use, and sexual orientation. Write a complete report that separately considers this drug for each subgroup and your recommendations as to whether people in the subgroup should take the vaccine. Structure your report in four sections each devoted to one of the four subgroups, use null and alternative hypothesis statements and correct statistical verbage when referencing p-values in conclusions.
 
 ## Males
+
+### Graphical Descriptive Results
+
+```{r}
+dd2 <- Males %>% group_by(infected,treatment) %>% summarize(count=n()) %>% mutate(prcnt=count/sum(count))
+
+
+# the group_by followed by summarize(count=n())
+
+basicC <- ggplot(dd2,aes(x=infected,y=count,fill=treatment))
+basicC + geom_bar(stat="identity",position="dodge")
+
+#Now for percentage plot
+
+basicCC <- ggplot(dd2,aes(x=infected,y=prcnt*100,fill=treatment)) 
+basicCC + geom_bar(stat="identity", position = "dodge")
+```
+
+The bar plots above show graphical descriptive summaries of the effects of two treatments (covid19 vaccine and placebo) on males. At first glance, the vaccine appears to be working among males as the two plots show that more males who took the placebo contracted the disease. 
+
+#### Numerical Descriptive Results 
+
+```{r}
+table1 <- xtabs(~infected + treatment, data=Males)
+rowPerc(table1)
+colPerc(table1)
+```
+
+The most important information: among males who contracted covid19 67.78% of them took the placebo, while 32.22% of them took the vaccine. A majority of the males who got covid took the placebo, therefore the vaccine seems to be working among the males.
+
+#### Inferential Results 
+
+```{r}
+chisq.test(table1)
+chisqtestGC(table1)
+malefisher<-fisher.test(table1)
+malefisher
+```
+
+The observed counts table shows the actual number of males who got covid and who didn't. Also the p-value is small meaning there is a statistical difference in the effect of the placebo and vaccine among males in preventing the infection. Males who took the placebo are about 2 times more likely to contract covid than those who took the vaccine based on the odds ratio value. 
+
+#### Efficacy of vaccine for males 
+
+```{r}
+EfficacyMales<- ((2.092161/(1+2.092161)*100) )
+malefisherlow<- malefisher$conf.int[1]
+malefisherhigh<- malefisher$conf.int[2]
+EfficacyMaleslow<-(malefisherlow/(1+malefisherlow)*100)
+EfficacyMaleshigh<-(malefisherhigh/(1+malefisherhigh)*100)
+EfficacyMales
+```
+
+Estimated efficacy of the vaccine among males. The 95% confidence interval of the vaccine efficacy among males from `r EfficacyMaleslow` to `r EfficacyMaleshigh`
 
 
 ## Females
