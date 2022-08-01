@@ -86,8 +86,27 @@ EfficacyMales
 
 Estimated efficacy of the vaccine among males. The 95% confidence interval of the vaccine efficacy among males from `r EfficacyMaleslow` to `r EfficacyMaleshigh`
 
-
 ## Females
+
+### Descriptive Results
+
+```{r}
+dd2 <- Females %>% group_by(infected,treatment) %>% summarize(count=n()) %>% mutate(prcnt=count/sum(count))
+
+
+# the group_by followed by summarize(count=n())
+
+basicC <- ggplot(dd2,aes(x=infected,y=count,fill=treatment))
+basicC + geom_bar(stat="identity",position="dodge")
+
+#Now for percentage plot
+
+basicCC <- ggplot(dd2,aes(x=infected,y=prcnt*100,fill=treatment)) 
+basicCC + geom_bar(stat="identity", position = "dodge")
+```
+
+The bar plots above show graphical descriptive summaries of the effects of two treatments (covid19 vaccine and placebo) on females. At first glance, the vaccine appears to be working among females as the two plots show that more females who took the placebo contracted the disease. 
+
 
 
 ## LGBTQ
