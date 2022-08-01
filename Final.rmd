@@ -219,6 +219,15 @@ basicCC + geom_bar(stat="identity", position = "dodge")
 
 The bar plots above show graphical descriptive summaries of the effects of two treatments (covid19 vaccine and placebo) on DrugUsers. At first glance, the vaccine appears to not be working among LGBTQ as the two plots show that less DrugUsers people did not take the placebo, yet a few did get covid.
 
+#### Numerical Descriptive Results 
+
+```{r}
+table1 <- xtabs(~infected + treatment, data=DrugUsers)
+rowPerc(table1)
+colPerc(table1)
+```
+
+The most important information: among the DrugUser who contracted covid19 15.00% of them took the placebo, while 85.00% of them took the vaccine. A handful of the DrugUser who got covid did not take the placebo, therefore the vaccine seems to be working among the DrugUser.
 
 
 
