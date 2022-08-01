@@ -184,6 +184,19 @@ lgbtqfisher
 
 The observed counts table shows the actual number of LGBTQ who got covid and who didn't. Also the p-value is small meaning there is a statistical difference in the effect of the placebo and vaccine among LGBTQ in preventing the infection. LGBTQ who took the placebo are about 2 times more likely to contract covid than those who took the vaccine based on the odds ratio value.
 
+#### Efficacy of vaccine for lgbtq
+
+```{r}
+EfficacyLGBTQ<- ((0.1465164 /(1+0.1465164 )*100) )
+lgbtqfisherlow<- lgbtqfisher$conf.int[1]
+lgbtqfisherhigh<- lgbtqfisher$conf.int[2]
+EfficacyLGBTQlow<-(lgbtqfisherlow/(1+lgbtqfisherlow)*100)
+EfficacyLGBTQhigh<-(lgbtqfisherhigh/(1+lgbtqfisherhigh)*100)
+EfficacyLGBTQ
+```
+
+Estimated efficacy of the vaccine among females. The 95% confidence interval of the vaccine efficacy among females from `r EfficacyLGBTQlow` to `r EfficacyLGBTQhigh`
+
 
 ## Druggies
 
