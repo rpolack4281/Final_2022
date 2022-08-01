@@ -144,6 +144,25 @@ Estimated efficacy of the vaccine among females. The 95% confidence interval of 
 
 ## LGBTQ
 
+#### Graphical Descriptive Results
+
+```{r}
+dd2 <- LGBTQ %>% group_by(infected,treatment) %>% summarize(count=n()) %>% mutate(prcnt=count/sum(count))
+
+
+# the group_by followed by summarize(count=n())
+
+basicC <- ggplot(dd2,aes(x=infected,y=count,fill=treatment))
+basicC + geom_bar(stat="identity",position="dodge")
+
+#Now for percentage plot
+
+basicCC <- ggplot(dd2,aes(x=infected,y=prcnt*100,fill=treatment)) 
+basicCC + geom_bar(stat="identity", position = "dodge")
+```
+
+The bar plots above show graphical descriptive summaries of the effects of two treatments (covid19 vaccine and placebo) on LGBTQ. At first glance, the vaccine appears to not be working among LGBTQ as the two plots show that less LGBTQ people did not take the placebo, yet a few did get covid. 
+
 
 
 ## Druggies
