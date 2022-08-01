@@ -107,6 +107,15 @@ basicCC + geom_bar(stat="identity", position = "dodge")
 
 The bar plots above show graphical descriptive summaries of the effects of two treatments (covid19 vaccine and placebo) on females. At first glance, the vaccine appears to be working among females as the two plots show that more females who took the placebo contracted the disease. 
 
+#### Numerical Descriptive Results 
+
+```{r}
+table1 <- xtabs(~infected + treatment, data=Females)
+rowPerc(table1)
+colPerc(table1)
+```
+
+The most important information: among females who contracted covid19 58.89% of them took the placebo, while 41.11% of them took the vaccine. A majority of the females who got covid took the placebo, therefore the vaccine seems to be working among the females.
 
 
 ## LGBTQ
