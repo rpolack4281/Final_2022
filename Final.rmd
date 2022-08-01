@@ -229,5 +229,15 @@ colPerc(table1)
 
 The most important information: among the DrugUser who contracted covid19 15.00% of them took the placebo, while 85.00% of them took the vaccine. A handful of the DrugUser who got covid did not take the placebo, therefore the vaccine seems to be working among the DrugUser.
 
+#### Inferential Results
+
+```{r}
+chisq.test(table1)
+chisqtestGC(table1)
+druguserfisher<-fisher.test(table1)
+druguserfisher
+```
+
+The observed counts table shows the actual number of DrugUser who got covid and who didn't. Also the p-value is small meaning there is a statistical difference in the effect of the placebo and vaccine among LGBTQ in preventing the infection. DrugUser who took the placebo are about 2 times more likely to contract covid than those who took the vaccine based on the odds ratio value.
 
 
